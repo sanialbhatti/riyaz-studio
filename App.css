@@ -1,0 +1,599 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&family=Playfair+Display:wght@500;600;700&display=swap');
+
+/* ── Reset ── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ── Body ── */
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: #f5f0e8;
+  color: #1e1a14;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── App wrapper ── */
+.riyaz-app {
+  min-height: 100vh;
+  background: linear-gradient(145deg, #fdf9f2 0%, #f5ede0 60%, #ede0cc 100%);
+  padding: 36px 20px 64px;
+}
+
+/* ─────────────────────────────
+   HEADER
+───────────────────────────── */
+.riyaz-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.riyaz-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 44px;
+  font-weight: 700;
+  color: #1e1a14;
+  letter-spacing: -0.5px;
+  line-height: 1.1;
+}
+
+.riyaz-logo-accent {
+  color: #b8722a;
+}
+
+.riyaz-tagline {
+  font-size: 12px;
+  color: #9a8060;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  font-weight: 400;
+  margin-top: 8px;
+}
+
+/* ── Status badge ── */
+.riyaz-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 14px;
+  padding: 8px 20px;
+  border-radius: 100px;
+  background: #ffffff;
+  border: 1px solid #ddd0bc;
+  font-size: 12px;
+  font-weight: 500;
+  color: #9a8060;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+}
+
+.riyaz-status.playing {
+  background: #fff8ee;
+  border-color: #b8722a;
+  color: #b8722a;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #ccc0a8;
+  flex-shrink: 0;
+}
+
+.riyaz-status.playing .status-dot {
+  background: #b8722a;
+  animation: pulse-dot 1.2s ease-in-out infinite;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1);    }
+  50%       { opacity: 0.3; transform: scale(0.7); }
+}
+
+/* ─────────────────────────────
+   CARDS
+───────────────────────────── */
+.rs-card {
+  background: #ffffff;
+  border: 1px solid #e0d0ba;
+  border-radius: 20px;
+  padding: 24px 26px;
+  margin-bottom: 18px;
+  box-shadow: 0 2px 18px rgba(140, 90, 20, 0.07);
+  transition: box-shadow 0.25s ease;
+}
+
+.rs-card:hover {
+  box-shadow: 0 4px 28px rgba(140, 90, 20, 0.12);
+}
+
+/* ── Card section label ── */
+.rs-section-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: #a08060;
+  margin-bottom: 18px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.rs-section-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: #ede0cc;
+}
+
+/* ─────────────────────────────
+   BEAT TRACKER
+───────────────────────────── */
+.beat-grid {
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+}
+
+.beat-cell {
+  flex: 1;
+  min-width: 22px;
+  height: 40px;
+  border-radius: 7px;
+  background: #faf6f0;
+  border: 1px solid #e0d0ba;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 500;
+  color: #c0a888;
+  transition: all 0.08s ease;
+  user-select: none;
+}
+
+.beat-cell.sam {
+  border-color: rgba(184, 114, 42, 0.45);
+  color: #b8722a;
+  background: #fdf7ee;
+}
+
+.beat-cell.khali {
+  border-color: rgba(192, 80, 100, 0.35);
+  color: #c05060;
+  background: #fff6f7;
+}
+
+.beat-cell.active {
+  background: #b8722a;
+  border-color: #b8722a;
+  color: #ffffff;
+  transform: scaleY(1.15);
+  font-weight: 700;
+  box-shadow: 0 3px 12px rgba(184, 114, 42, 0.40);
+}
+
+.beat-cell.khali.active {
+  background: #c05060;
+  border-color: #c05060;
+  box-shadow: 0 3px 12px rgba(192, 80, 100, 0.40);
+}
+
+/* ── Beat legend ── */
+.beat-legend {
+  display: flex;
+  gap: 18px;
+  flex-wrap: wrap;
+  margin-top: 14px;
+}
+
+.legend-chip {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 11px;
+  color: #9a8060;
+  font-weight: 400;
+}
+
+.legend-swatch {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  flex-shrink: 0;
+}
+
+/* ─────────────────────────────
+   SELECTOR BUTTONS (Taal + Raga)
+───────────────────────────── */
+.sel-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.sel-grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.sel-btn {
+  background: #faf6f0;
+  border: 1.5px solid #e0d0ba;
+  border-radius: 14px;
+  padding: 16px 12px;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.18s ease;
+  font-family: 'DM Sans', sans-serif;
+  outline: none;
+}
+
+.sel-btn:hover {
+  border-color: #b8722a;
+  background: #fef7ee;
+  transform: translateY(-1px);
+  box-shadow: 0 3px 12px rgba(184, 114, 42, 0.12);
+}
+
+.sel-btn.active {
+  background: #b8722a;
+  border-color: #b8722a;
+  transform: translateY(-1px);
+  box-shadow: 0 5px 18px rgba(184, 114, 42, 0.32);
+}
+
+.sel-btn-name {
+  display: block;
+  font-size: 15px;
+  font-weight: 600;
+  color: #2a1e10;
+  margin-bottom: 4px;
+  line-height: 1.2;
+}
+
+.sel-btn-sub {
+  display: block;
+  font-size: 11px;
+  color: #9a8060;
+  line-height: 1.5;
+}
+
+.sel-btn.active .sel-btn-name,
+.sel-btn.active .sel-btn-sub {
+  color: #ffffff;
+}
+
+/* ─────────────────────────────
+   BPM CONTROL
+───────────────────────────── */
+.bpm-display {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 18px;
+}
+
+.bpm-number {
+  font-family: 'Playfair Display', serif;
+  font-size: 56px;
+  font-weight: 700;
+  color: #1e1a14;
+  line-height: 1;
+}
+
+.bpm-unit {
+  font-size: 16px;
+  font-weight: 300;
+  color: #9a8060;
+}
+
+.bpm-note {
+  margin-left: auto;
+  font-size: 11px;
+  color: #b8722a;
+  font-weight: 500;
+  background: #fff7ee;
+  border: 1px solid #e8d0b0;
+  padding: 3px 10px;
+  border-radius: 6px;
+  align-self: center;
+}
+
+/* ── Range slider ── */
+.rs-slider {
+  width: 100%;
+  -webkit-appearance: none;
+  height: 4px;
+  background: #e0d0ba;
+  border-radius: 4px;
+  outline: none;
+  cursor: pointer;
+}
+
+.rs-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 22px;
+  height: 22px;
+  background: #b8722a;
+  border-radius: 50%;
+  border: 3px solid #ffffff;
+  box-shadow: 0 0 0 1.5px #b8722a, 0 2px 8px rgba(184,114,42,0.35);
+  cursor: pointer;
+  transition: transform 0.15s;
+}
+
+.rs-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+}
+
+.slider-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  color: #b8a890;
+  margin-top: 8px;
+  font-weight: 400;
+}
+
+/* ─────────────────────────────
+   BPM RANGE INDICATOR
+───────────────────────────── */
+.bpm-range-bar {
+  display: flex;
+  gap: 6px;
+  margin-top: 14px;
+}
+
+.bpm-range-item {
+  flex: 1;
+  padding: 8px 6px;
+  border-radius: 8px;
+  text-align: center;
+  border: 1px solid #e0d0ba;
+  background: #faf6f0;
+  transition: all 0.2s;
+}
+
+.bpm-range-item.active-range {
+  background: #b8722a;
+  border-color: #b8722a;
+}
+
+.bpm-range-label {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  color: #9a8060;
+}
+
+.bpm-range-val {
+  display: block;
+  font-size: 10px;
+  color: #b8a890;
+  margin-top: 2px;
+}
+
+.bpm-range-item.active-range .bpm-range-label,
+.bpm-range-item.active-range .bpm-range-val {
+  color: #ffffff;
+}
+
+/* ─────────────────────────────
+   METRONOME
+───────────────────────────── */
+.metro-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.metro-btn {
+  background: #faf6f0;
+  border: 1.5px solid #e0d0ba;
+  border-radius: 10px;
+  padding: 10px 20px;
+  font-size: 12px;
+  font-weight: 500;
+  color: #9a8060;
+  cursor: pointer;
+  letter-spacing: 1px;
+  transition: all 0.2s;
+  font-family: 'DM Sans', sans-serif;
+  white-space: nowrap;
+  outline: none;
+}
+
+.metro-btn:hover {
+  border-color: #b8722a;
+  color: #b8722a;
+}
+
+.metro-btn.on {
+  background: #f0f9f4;
+  border-color: #3aaa6a;
+  color: #2a8a50;
+}
+
+.metro-lights {
+  display: flex;
+  gap: 6px;
+  flex: 1;
+}
+
+.metro-light {
+  flex: 1;
+  height: 6px;
+  border-radius: 3px;
+  background: #ede0cc;
+  transition: background 0.08s;
+}
+
+.metro-light.flash {
+  background: #3aaa6a;
+  box-shadow: 0 0 8px rgba(58, 170, 106, 0.5);
+}
+
+/* ─────────────────────────────
+   AUDIO INFO PANEL
+───────────────────────────── */
+.audio-info-panel {
+  background: #f5f9f5;
+  border: 1px solid #cce8d4;
+  border-radius: 12px;
+  padding: 16px 18px;
+}
+
+.audio-info-title {
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: #4a9060;
+  font-weight: 600;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.audio-info-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+  font-size: 12px;
+}
+
+.audio-info-row:last-child {
+  margin-bottom: 0;
+}
+
+.audio-info-key {
+  color: #6a9070;
+  font-weight: 400;
+}
+
+.audio-info-val {
+  color: #2a7040;
+  font-weight: 600;
+}
+
+/* ── Warning / error state ── */
+.audio-warning {
+  background: #fff8f0;
+  border: 1px solid #e8c090;
+  border-radius: 10px;
+  padding: 12px 16px;
+  font-size: 12px;
+  color: #8a5020;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+/* ─────────────────────────────
+   TRANSPORT BUTTONS
+───────────────────────────── */
+.transport-row {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.btn-play {
+  flex: 1;
+  height: 58px;
+  background: #1e1a14;
+  border: none;
+  border-radius: 16px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  color: #fdf8f0;
+  cursor: pointer;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  transition: all 0.2s ease;
+  outline: none;
+}
+
+.btn-play:hover:not(:disabled) {
+  background: #2e2a1e;
+  box-shadow: 0 6px 24px rgba(30, 26, 20, 0.30);
+  transform: translateY(-1px);
+}
+
+.btn-play:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.btn-play:disabled {
+  background: #d0c8b8;
+  color: #9a9080;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+}
+
+.btn-play-circle {
+  width: 26px;
+  height: 26px;
+  background: #b8722a;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 9px;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+.btn-stop {
+  width: 58px;
+  height: 58px;
+  background: #ffffff;
+  border: 1.5px solid #e0d0ba;
+  border-radius: 16px;
+  font-size: 18px;
+  color: #c0a888;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.2s ease;
+  outline: none;
+}
+
+.btn-stop:hover:not(:disabled) {
+  border-color: #c05060;
+  color: #c05060;
+  background: #fff6f7;
+  transform: translateY(-1px);
+}
+
+.btn-stop:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ─────────────────────────────
+   RESPONSIVE
+───────────────────────────── */
+@media (max-width: 576px) {
+  .riyaz-logo   { font-size: 34px; }
+  .bpm-number   { font-size: 44px; }
+  .sel-grid-3   { grid-template-columns: 1fr 1fr; }
+  .rs-card      { padding: 18px 16px; }
+  .riyaz-app    { padding: 24px 12px 48px; }
+}

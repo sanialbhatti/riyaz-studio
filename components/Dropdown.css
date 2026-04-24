@@ -1,0 +1,18 @@
+.select-dark {
+  background: #12121e;
+  border: 1px solid #2a2a3a;
+  color: #e5e7eb;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.select-dark:focus {
+  border-color: #e8d48a;
+  box-shadow: 0 0 8px rgba(232,212,138,0.5);
+}
+
+label {
+  font-size: 11px;
+  color: #6a6a88;
+  margin-bottom: 6px;
+}
